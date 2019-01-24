@@ -4,9 +4,7 @@ function printHello(){
 }
 
 function addNumbers(){
-    var num1 = document.getElementById("field1").value;
-    var num2 = document.getElementById("field2").value;
-    document.getElementById("field3").value = parseInt(num1) + parseInt(num2);
+    $("#field3").val(parseInt($("#field1").val()) + parseInt($("#field2").val()));
 }
 
 function hideParagraph(){
