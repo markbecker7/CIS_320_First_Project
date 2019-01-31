@@ -14,22 +14,16 @@ public class DBHelper {
         try {
             log.log(Level.FINE, "Getting a database connection");
 
-            // Create a context. Uses context.xml
             Context initContext = new InitialContext();
 
-            // Select which context to lookup.
             Context envContext = (Context) initContext.lookup("java:/comp/env");
 
-            // Grab a source of database connection. Note how this matches the name
-            // field in context.xml.
             DataSource ds = (DataSource) envContext.lookup("jdbc/cis320");
 
-            // Hey, now we've got a datasource for connections. Let's get a connection.
             Connection conn = ds.getConnection();
             return conn;
         }
         catch(Exception e) {
-            // Whoops, something bad happened. Log it.
             log.log(Level.SEVERE, "Unable to get a database connection.", e);
             return null;
         }
