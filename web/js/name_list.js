@@ -1,4 +1,5 @@
 
+//Updating Table based on what's in database
 function updateTable(){
     var url = "api/name_list_get";
 
@@ -15,6 +16,7 @@ function updateTable(){
 
 updateTable();
 
+//Showing Modal, clearing form fields
 var addItemButton = $('#addItem');
 addItemButton.on("click", showDialogAdd);
 
@@ -24,8 +26,6 @@ function showDialogAdd() {
     console.log("Opening add item dialog");
 
     // Clear out the values in the form.
-    // Otherwise we'll keep values from when we last
-    // opened or hit edit.
     $('#id').val("");
     $('#firstName').val("");
     $('#lastName').val("");
@@ -36,6 +36,7 @@ function showDialogAdd() {
     $('#myModal').modal('show');
 }
 
+//Modal Save Button
 var saveChangesButton = $('#saveChanges');
 saveChangesButton.on("click", saveChanges);
 
