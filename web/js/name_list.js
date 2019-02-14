@@ -78,7 +78,7 @@ function validateFields() {
     var nameReg = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{1,30}$/u;
     var phoneReg = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/i;
     var emailReg = /^\S+@\S+\.\S+$/i;
-    var birthdayReg = /^[0-2][0-9]{3}-[0-1][0-2]-[0-3][0-9]$/i;
+    var birthdayReg = /^[0-2][0-9]{3}-[0-1][0-9]-[0-3][0-9]$/i;
 
     if (nameReg.test(firstNameField.val())) {
         firstNameField.removeClass("is-invalid");
