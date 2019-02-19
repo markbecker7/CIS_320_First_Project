@@ -153,6 +153,7 @@ function jqueryPostJSONAction(jsonData) {
         contentType: "application/json",
         dataType: 'text' // Could be JSON or whatever too
     });
+    updateTable();
 }
 
 
