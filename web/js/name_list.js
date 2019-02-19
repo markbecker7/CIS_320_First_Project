@@ -69,6 +69,7 @@ function saveChanges(){
 //Regular Expression Validation
 function validateFields() {
 
+    var validFields = true;
     var firstNameField = $('#firstName');
     var lastNameField = $('#lastName');
     var phoneField = $('#phone');
@@ -86,6 +87,7 @@ function validateFields() {
     } else {
         firstNameField.removeClass("is-valid");
         firstNameField.addClass("is-invalid");
+        validFields = false;
     }
 
     if (nameReg.test(lastNameField.val())) {
@@ -94,6 +96,7 @@ function validateFields() {
     } else {
         lastNameField.removeClass("is-valid");
         lastNameField.addClass("is-invalid");
+        validFields = false;
     }
 
     if (phoneReg.test(phoneField.val())) {
@@ -102,6 +105,7 @@ function validateFields() {
     } else {
         phoneField.removeClass("is-valid");
         phoneField.addClass("is-invalid");
+        validFields = false;
     }
 
     if (emailReg.test(emailField.val())) {
@@ -110,6 +114,7 @@ function validateFields() {
     } else {
         emailField.removeClass("is-valid");
         emailField.addClass("is-invalid");
+        validFields = false;
     }
 
     if (birthdayReg.test(birthdayField.val())) {
@@ -118,7 +123,36 @@ function validateFields() {
     } else {
         birthdayField.removeClass("is-valid");
         birthdayField.addClass("is-invalid");
+        validFields = false;
     }
+
+    if(validFields){
+        var jsonData = {
+            "first":firstNameField.val(),
+            "last":lastNameField.val(),
+            "phone":phoneField.val(),
+            "email":emailField.val(),
+            "birthday":birthdayField.val()
+        };
+        console.log(jsonData);
+        jqueryPostJSONAction(jsonData);
+    }
+}
+
+function jqueryPostJSONAction(jsonData) {
+
+    var url = "api/name_list_edit";
+
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: JSON.stringify(jsonData),
+        success: function(dataFromServer) {
+            console.log(dataFromServer);
+        },
+        contentType: "application/json",
+        dataType: 'text' // Could be JSON or whatever too
+    });
 }
 
 
