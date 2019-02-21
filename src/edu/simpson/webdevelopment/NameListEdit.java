@@ -42,6 +42,5 @@ public class NameListEdit extends HttpServlet {
 
         // Make sure our field was set.
         PersonDAO.insertPerson(fromJson);
-        out.println("Object test: "+fromJson.getFirst() + "  " + fromJson.getBirthday());
     }
 }

@@ -134,7 +134,6 @@ function validateFields() {
             "email":emailField.val(),
             "birthday":birthdayField.val()
         };
-        console.log(jsonData);
         jqueryPostJSONAction(jsonData);
     }
 }
@@ -149,12 +148,16 @@ function jqueryPostJSONAction(jsonData) {
         data: JSON.stringify(jsonData),
         success: function(dataFromServer) {
             console.log(dataFromServer);
+            refreshTable();
         },
         contentType: "application/json",
-        dataType: 'text' // Could be JSON or whatever too
+        dataType: 'text'
     });
-    updateTable();
 }
 
+function refreshTable() {
+    $("#dataTable tr").remove();
+    updateTable();
+}
 
 
