@@ -13,13 +13,26 @@ import java.io.PrintWriter;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @WebServlet(name = "NameListEdit")
 public class NameListEdit extends HttpServlet {
 
+    private Pattern nameValidationPattern;
+    private Pattern phoneValidationPattern;
+    private Pattern emailValidationPattern;
+    private Pattern birthdayValidationPattern;
+
+    public NameListEdit(){
+        nameValidationPattern = Pattern.compile("^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{1,30}$");
+        phoneValidationPattern = Pattern.compile("^(\\+\\d{1,2}\\s)?\\(?\\d{3}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{4}$");
+        emailValidationPattern = Pattern.compile("^\\S+@\\S+\\.\\S+$");
+        birthdayValidationPattern = Pattern.compile("^[0-2][0-9]{3}-[0-1][0-9]-[0-3][0-9]$");
+    }
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        // You can output in any format, text/JSON, text/HTML, etc. We'll keep it simple
         response.setContentType("text/plain");
         PrintWriter out = response.getWriter();
 
@@ -40,7 +53,19 @@ public class NameListEdit extends HttpServlet {
         Gson gson = new Gson();
         Person fromJson = gson.fromJson(requestString, Person.class);
 
-        // Make sure our field was set.
-        PersonDAO.insertPerson(fromJson);
+        //Validate and insert
+        Matcher m1 = nameValidationPattern.matcher(fromJson.getFirst());
+        Matcher m2 = nameValidationPattern.matcher(fromJson.getLast());
+        Matcher m3 = phoneValidationPattern.matcher(fromJson.getPhone());
+        Matcher m4 = emailValidationPattern.matcher(fromJson.getEmail());
+        Matcher m5 = birthdayValidationPattern.matcher(fromJson.getBirthday());
+
+        if(m1.find() && m2.find() && m3.find() && m4.find() && m5.find()){
+            PersonDAO.insertPerson(fromJson);
+            System.out.println("Passed Validation");
+        } else {
+            System.out.println("Did not pass validation");
+        }
+
     }
 }
