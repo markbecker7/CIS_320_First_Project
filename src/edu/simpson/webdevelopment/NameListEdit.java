@@ -60,11 +60,48 @@ public class NameListEdit extends HttpServlet {
         Matcher m4 = emailValidationPattern.matcher(fromJson.getEmail());
         Matcher m5 = birthdayValidationPattern.matcher(fromJson.getBirthday());
 
-        if(m1.find() && m2.find() && m3.find() && m4.find() && m5.find()){
-            PersonDAO.insertPerson(fromJson);
-            System.out.println("Passed Validation");
+        boolean allValid = true;
+
+        if(m1.find()){
+            System.out.println("First Name is Valid");
         } else {
-            System.out.println("Did not pass validation");
+            System.out.println("First Name is not Valid");
+            allValid = false;
+        }
+
+        if(m2.find()){
+            System.out.println("Last Name is Valid");
+        } else {
+            System.out.println("Last Name is not Valid");
+            allValid = false;
+        }
+
+        if(m3.find()){
+            System.out.println("Phone is Valid");
+        } else {
+            System.out.println("Phone is not Valid");
+            allValid = false;
+        }
+
+        if(m4.find()){
+            System.out.println("Email is Valid");
+        } else {
+            System.out.println("Email is not Valid");
+            allValid = false;
+        }
+
+        if(m5.find()){
+            System.out.println("Birthday is Valid");
+        } else {
+            System.out.println("Birthday is not Valid");
+            allValid = false;
+        }
+
+        if(allValid){
+            PersonDAO.insertPerson(fromJson);
+            System.out.println("All fields passed validation");
+        } else {
+            System.out.println("All fields did not pass validation");
         }
 
     }

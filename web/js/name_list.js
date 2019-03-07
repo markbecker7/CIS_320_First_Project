@@ -7,14 +7,36 @@ function updateTable(){
         for (var i = 0; i < jsonResult.length; i++ ){
             var phoneString = jsonResult[i].phone.substring(0, 3) + "-" + jsonResult[i].phone.substring(3, 6) +
                 "-" + jsonResult[i].phone.substring(6, 10);
-            $("#dataTable tbody:last").append('<tr><td>' + jsonResult[i].id + '</td><td>' + jsonResult[i].first +
-                '</td><td>' + jsonResult[i].last + '</td><td>' + phoneString + '</td><td>' + jsonResult[i].email +
-                '</td><td>' + jsonResult[i].birthday + '</td></tr>');
+            $("#dataTable tbody:last").append('<tr><td>' + jsonResult[i].first + '</td><td>' + jsonResult[i].last + '</td>' +
+                '<td>' + phoneString + '</td><td>' + jsonResult[i].email +
+                '</td><td>' + jsonResult[i].birthday + '</td>' + '<td><button type="button" name="delete" ' +
+                'class="deleteButton btn" ' + 'value="' + jsonResult[i].id + '">Delete</button>' + '</td>' +
+                '</tr>');
         }
+        $(".deleteButton").on("click", deleteItem);
     });
 }
 
 updateTable();
+
+function deleteItem(e) {
+    var jsonId = {"id": e.target.value};
+
+    var url = "api/name_list_delete";
+
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: JSON.stringify(jsonId),
+        success: function(dataFromServer) {
+            console.log(dataFromServer);
+            refreshTable();
+        },
+        contentType: "application/json",
+        dataType: 'text'
+    });
+}
+
 
 //Showing Modal, clearing form fields
 var addItemButton = $('#addItem');
