@@ -29,7 +29,6 @@ function deleteItem(e) {
         url: url,
         data: JSON.stringify(jsonId),
         success: function(dataFromServer) {
-            console.log(dataFromServer);
             refreshTable();
         },
         contentType: "application/json",
@@ -169,7 +168,6 @@ function jqueryPostJSONAction(jsonData) {
         url: url,
         data: JSON.stringify(jsonData),
         success: function(dataFromServer) {
-            console.log(dataFromServer);
             refreshTable();
         },
         contentType: "application/json",
