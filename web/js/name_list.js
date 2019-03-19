@@ -145,6 +145,7 @@ function validateFields() {
     if (phoneReg.test(phoneField.val())) {
         phoneField.removeClass("is-invalid");
         phoneField.addClass("is-valid");
+        var phoneNumber = phoneField.val().replace(/\D/g, '');
     } else {
         phoneField.removeClass("is-valid");
         phoneField.addClass("is-invalid");
@@ -173,7 +174,7 @@ function validateFields() {
         var jsonData = {
             "first":firstNameField.val(),
             "last":lastNameField.val(),
-            "phone":phoneField.val(),
+            "phone":phoneNumber,
             "email":emailField.val(),
             "birthday":birthdayField.val()
         };
