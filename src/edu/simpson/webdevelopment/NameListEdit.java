@@ -98,7 +98,11 @@ public class NameListEdit extends HttpServlet {
         }
 
         if(allValid){
-            PersonDAO.insertPerson(fromJson);
+            if(fromJson.getId() == null){
+                PersonDAO.insertPerson(fromJson);
+            } else {
+                PersonDAO.updatePerson(fromJson);
+            }
             System.out.println("All fields passed validation");
         } else {
             System.out.println("All fields did not pass validation");
