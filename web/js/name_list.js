@@ -11,13 +11,34 @@ function updateTable(){
                 '<td>' + phoneString + '</td><td>' + jsonResult[i].email +
                 '</td><td>' + jsonResult[i].birthday + '</td>' + '<td><button type="button" name="delete" ' +
                 'class="deleteButton btn" ' + 'value="' + jsonResult[i].id + '">Delete</button>' + '</td>' +
+                '<td><button type="button" name="edit" class="editButton btn" value="' + jsonResult[i].id + '"'
+                + '>Edit</button></td>' +
                 '</tr>');
         }
         $(".deleteButton").on("click", deleteItem);
+        $(".editButton").on("click", editItem);
     });
 }
 
 updateTable();
+
+function editItem(e) {
+    var id = e.target.value;
+    var firstName = e.target.parentNode.parentNode.querySelectorAll("td")[0].innerHTML;
+    var lastName = e.target.parentNode.parentNode.querySelectorAll("td")[1].innerHTML;
+    var phone = e.target.parentNode.parentNode.querySelectorAll("td")[2].innerHTML;
+    var email = e.target.parentNode.parentNode.querySelectorAll("td")[3].innerHTML;
+    var birthday = e.target.parentNode.parentNode.querySelectorAll("td")[4].innerHTML;
+
+    $('#id').val(id);
+    $('#firstName').val(firstName);
+    $('#lastName').val(lastName);
+    $('#phone').val(phone);
+    $('#email').val(email);
+    $('#birthday').val(birthday);
+
+    $('#myModal').modal('show');
+}
 
 function deleteItem(e) {
     var jsonId = {"id": e.target.value};
@@ -91,6 +112,7 @@ function saveChanges(){
 function validateFields() {
 
     var validFields = true;
+    var idField = $('#id');
     var firstNameField = $('#firstName');
     var lastNameField = $('#lastName');
     var phoneField = $('#phone');
@@ -155,6 +177,9 @@ function validateFields() {
             "email":emailField.val(),
             "birthday":birthdayField.val()
         };
+        if(idField.val()){
+            jsonData["id"] = idField.val();
+        }
         jqueryPostJSONAction(jsonData);
     }
 }

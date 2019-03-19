@@ -48,6 +48,7 @@
             <th>Email</th>
             <th>Birthday</th>
             <th>Delete</th>
+            <th>Edit</th>
         </tr>
         </thead>
         <tbody>
@@ -68,6 +69,12 @@
             <div class="modal-body">
                 <form id="my-form" name="my-form">
                     <div class="form-group">
+                        <div id="idDiv" class="form-group has-feedback" hidden>
+                            <label class="control-label" for="id">ID:</label>
+                            <input type="text" id="id" name="id" class="form-control" placeholder="Id" aria-describedby="idStatus"/>
+                            <span id="idGlyph" class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                            <span id="idStatus" class="sr-only"></span>
+                        </div>
                         <div id="firstNameDiv" class="form-group has-feedback">
                             <label class="control-label" for="firstName">First Name:</label>
                             <input type="text" id="firstName" name="firstName" class="form-control" placeholder="First name" aria-describedby="firstNameStatus"/>
