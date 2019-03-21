@@ -37,6 +37,8 @@ function editItem(e) {
     $('#email').val(email);
     $('#birthday').val(birthday);
 
+    removeValidationClasses();
+
     $('#myModal').modal('show');
 }
 
@@ -57,28 +59,12 @@ function deleteItem(e) {
     });
 }
 
-
-//Showing Modal, clearing form fields
-var addItemButton = $('#addItem');
-addItemButton.on("click", showDialogAdd);
-
-function showDialogAdd() {
-
-    // Print that we got here
-    console.log("Opening add item dialog");
-
+function removeValidationClasses(){
     var firstNameField = $('#firstName');
     var lastNameField = $('#lastName');
     var phoneField = $('#phone');
     var emailField = $('#email');
     var birthdayField = $('#birthday');
-
-    // Clear out the values and Styles in the form.
-    firstNameField.val("");
-    lastNameField.val("");
-    phoneField.val("");
-    emailField.val("");
-    birthdayField.val("");
 
     firstNameField.removeClass("is-invalid");
     firstNameField.removeClass("is-valid");
@@ -94,6 +80,33 @@ function showDialogAdd() {
 
     birthdayField.removeClass("is-invalid");
     birthdayField.removeClass("is-valid");
+}
+
+//Showing Modal, clearing form fields
+var addItemButton = $('#addItem');
+addItemButton.on("click", showDialogAdd);
+
+function showDialogAdd() {
+
+    // Print that we got here
+    console.log("Opening add item dialog");
+
+    var idField = $('#id');
+    var firstNameField = $('#firstName');
+    var lastNameField = $('#lastName');
+    var phoneField = $('#phone');
+    var emailField = $('#email');
+    var birthdayField = $('#birthday');
+
+    // Clear out the values and Styles in the form.
+    idField.val("");
+    firstNameField.val("");
+    lastNameField.val("");
+    phoneField.val("");
+    emailField.val("");
+    birthdayField.val("");
+
+    removeValidationClasses();
 
     // Show the hidden dialog
     $('#myModal').modal('show');
