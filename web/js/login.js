@@ -1,6 +1,6 @@
 function logOut() {
 
-    var url = "api/invalidate_session_servlet";
+    var url = "api/logout_servlet";
 
     $.post(url, null, function (dataFromServer) {
         console.log("Finished calling servlet.");
@@ -21,6 +21,7 @@ function getLogin() {
             $('#logOutSection').show();
         } else {
             $('#logOutSection').hide();
+            $('#getLoginResult').html("");
         }
     });
 }

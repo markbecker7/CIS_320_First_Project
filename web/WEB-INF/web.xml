@@ -52,5 +52,15 @@
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/api/login_servlet</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>edu.simpson.webdevelopment.LogoutServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/api/logout_servlet</url-pattern>
+    </servlet-mapping>
 
 </web-app>
