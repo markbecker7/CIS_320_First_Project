@@ -194,6 +194,7 @@ function validateFields() {
         if(idField.val()){
             jsonData["id"] = idField.val();
         }
+        $('#myModal').modal('hide');
         jqueryPostJSONAction(jsonData);
     }
 }
